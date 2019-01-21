@@ -42,22 +42,7 @@ class DetailsScreen extends React.Component {
       title: 'Details screen #' + navigation.getParam('index', '0'),
     };
   };
-  animvalue = new Animated.Value(0);
-  rotation = this.animvalue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
   state = { count: 1, text: '' };
-  componentDidMount() {
-    Animated.loop(
-      Animated.timing(this.animvalue, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: false,
-      })
-    ).start();
-    setInterval(() => this.setState({ count: this.state.count + 1 }), 500);
-  }
   render() {
     const index = this.props.navigation.getParam('index', 0);
     return (
@@ -76,20 +61,6 @@ class DetailsScreen extends React.Component {
           style={styles.textInput}
           onChangeText={text => this.setState({ text })}
           text={this.state.text}
-        />
-        <Animated.View
-          style={{
-            transform: [
-              {
-                rotate: this.rotation,
-              },
-            ],
-            marginTop: 20,
-            borderColor: 'blue',
-            borderWidth: 3,
-            width: 20,
-            height: 20,
-          }}
         />
       </View>
     );
